@@ -6,6 +6,7 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "neovim/nvim-lspconfig",
       "VonHeikemen/lsp-zero.nvim",
+      "vigoux/ltex-ls.nvim", -- dictionnary
     },
     lazy = false,
     config = function()
@@ -38,15 +39,13 @@ return {
         info = "»",
       })
       lsp_zero.on_attach(function(client, bufnr)
-        -- Keymaps for lsp functionality
-        vim.keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<cr>", {})
-        vim.keymap.set("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<cr>", {})
-        vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", {})
+        vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {})
+        vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+        vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition, {})
+        vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, {})
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
         lsp_zero.default_keymaps({ buffer = bufnr })
       end)
     end,
-  },
-  {
-    "vigoux/ltex-ls.nvim",
   },
 }
