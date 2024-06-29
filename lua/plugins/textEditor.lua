@@ -1,7 +1,14 @@
+-- vim.api.nvim_create_autocmd("Filetype *.md", {
+-- 	--     vim.api.nvim_set_option_value("wrap", true, { win = 0 })
+-- 	callback = function()
+-- 		vim.notify("hello!", vim.log.levels.WARN)
+-- 	end,
+-- })
+
 return {
 	{
 		"folke/zen-mode.nvim",
-		dependencies = { "folke/twilight.nvim", "preservim/vim-pencil" },
+		dependencies = { "folke/twilight.nvim" },
 		opts = {
 			window = {
 				width = 0.8,

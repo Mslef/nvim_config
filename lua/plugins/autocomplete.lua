@@ -38,7 +38,7 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "path" },
-					{ name = "luasnip" },
+					-- { name = "luasnip" },
 					{ name = "buffer" }, --TODO: not for md files
 					{ name = "latex_symbols" },
 					{ name = "cmp_zotcite" },

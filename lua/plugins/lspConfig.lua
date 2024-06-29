@@ -42,15 +42,10 @@ return {
 					end,
 					tsserver = lspconfig.tsserver.setup({}),
 					astro = lspconfig.astro.setup({}),
-					ltex = lspconfig.ltex.setup({}),
+					r_language_server = lspconfig.r_language_server.setup({}),
+					-- ltex = lspconfig.ltex.setup({}),
 				},
 			})
-			-- lsp_zero.set_sign_icons({
-			--   error = "✘",
-			--   warn = "▲",
-			--   hint = "⚑",
-			--   info = "»",
-			-- })
 		end,
 	},
 }
