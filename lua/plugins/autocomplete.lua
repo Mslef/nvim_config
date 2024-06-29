@@ -25,6 +25,7 @@ return {
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load() --TODO : write my own snippets
 			require("nvim-ts-autotag").setup()
+			local luasnip = require("luasnip")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local cmp = require("cmp")
 			-- Icons
@@ -46,14 +47,44 @@ return {
 				}),
 				window = { completion = cmp.config.window.bordered(), documentation = cmp.config.window.bordered() },
 				mapping = cmp.mapping.preset.insert({
-					["<C-b>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<CR>"] = cmp.mapping.confirm({ select = false }),
-					["<C-tab>"] = cmp.mapping.complete(),
+					-- ["<tab>"] = cmp.mapping.confirm({ select = false }),
+					-- ["<C-m>"] = cmp.mapping.complete(),
+					["<CR>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							if luasnip.expandable() then
+								luasnip.expand()
+							else
+								cmp.confirm({
+									select = true,
+								})
+							end
+						else
+							fallback()
+						end
+					end),
+
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif luasnip.locally_jumpable(1) then
+							luasnip.jump(1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif luasnip.locally_jumpable(-1) then
+							luasnip.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 				}),
 				snippet = {
 					expand = function(args)
-						local luasnip = require("luasnip")
 						luasnip.filetype_extend("javascriptreact", { "html" })
 						luasnip.lsp_expand(args.body)
 					end,

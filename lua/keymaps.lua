@@ -20,7 +20,7 @@ vim.keymap.set("n", "k", "gk", {})
 vim.keymap.set("n", "j", "gj", {})
 vim.keymap.set({ "i", "v" }, "xz", "<esc>", {})
 vim.keymap.set("n", "<leader>s", ":w<CR>", {})
-vim.keymap.set("n", "<C-x>", ":bd<CR>", {})
+vim.keymap.set("n", "<C-w>", ":bd<CR>", {})
 
 vim.keymap.set("n", "<leader>spl", ":vsplit<CR>", {})
 vim.keymap.set("n", "<leader>cs", ":nohlsearch<CR>", {})

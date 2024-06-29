@@ -1,9 +1,9 @@
--- vim.api.nvim_create_autocmd("Filetype *.md", {
--- 	--     vim.api.nvim_set_option_value("wrap", true, { win = 0 })
--- 	callback = function()
--- 		vim.notify("hello!", vim.log.levels.WARN)
--- 	end,
--- })
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*.md",
+	callback = function(args)
+		require("zen-mode").reset({})
+	end,
+})
 
 return {
 	{
@@ -43,14 +43,6 @@ return {
 					min_char = 2,
 				},
 				notes_subdir = "notes",
-				mappings = {
-					["<cr>"] = {
-						action = function()
-							return require("obsidian").util.smart_action()
-						end,
-						opts = { buffer = true, expr = true },
-					},
-				},
 				note_id_func = function(title)
 					if title ~= nil then
 						return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
