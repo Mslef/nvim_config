@@ -17,13 +17,12 @@ return {
 			"windwp/nvim-ts-autotag",
 			"kdheepak/cmp-latex-symbols",
 			"roobert/tailwindcss-colorizer-cmp.nvim",
-			"rafamadriz/friendly-snippets",
 			"nvim-lua/plenary.nvim",
 			"jalvesaq/zotcite",
 			"jalvesaq/cmp-zotcite",
 		},
 		config = function()
-			require("luasnip.loaders.from_vscode").lazy_load() --TODO : write my own snippets
+			-- require("luasnip.loaders.from_vscode").lazy_load() --TODO : write my own snippets
 			require("nvim-ts-autotag").setup()
 			local luasnip = require("luasnip")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -40,7 +39,18 @@ return {
 					{ name = "nvim_lsp" },
 					{ name = "path" },
 					-- { name = "luasnip" },
-					{ name = "buffer" }, --TODO: not for md files
+					{
+						name = "buffer",
+						option = {
+							get_bufnrs = function()
+								local bufs = {}
+								for _, win in ipairs(vim.api.nvim_list_wins()) do
+									bufs[vim.api.nvim_win_get_buf(win)] = true
+								end
+								return vim.tbl_keys(bufs)
+							end,
+						},
+					}, --TODO: not for md files
 					{ name = "latex_symbols" },
 					{ name = "cmp_zotcite" },
 					{ name = "vim-dadbod-completion" },

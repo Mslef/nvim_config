@@ -20,7 +20,6 @@ return {
 			javascript = { "prettierd" },
 			typescript = { "prettierd" },
 			html = { "prettierd" },
-			-- markdown = { "prettierd" },
 			go = { "gofumpt" },
 		},
 	},

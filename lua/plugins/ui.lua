@@ -45,11 +45,17 @@ return {
 		dependencies = { "tpope/vim-dadbod", "kristijanhusak/vim-dadbod-completion" },
 	},
 	{
+		"stevearc/oil.nvim",
+		config = function()
+			require("oil").setup({})
+		end,
+	},
+	{
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "VeryLazy",
 		config = function()
-			require("notify").setup({ background_colour = "#000000" })
+			-- require("notify").setup({ background_colour = "#000000" })
 			require("noice").setup({
 				cmdline = {
 					opts = {

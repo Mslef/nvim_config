@@ -1,3 +1,14 @@
+vim.opt.termguicolors = true
+vim.cmd("set clipboard=unnamed")
+vim.cmd("set conceallevel=1 guifont=:h columns=200")
+vim.cmd("set expandtab tabstop=2 softtabstop=2 shiftwidth=2")
+vim.cmd("set relativenumber number")
+vim.cmd("set wrap linebreak")
+vim.cmd("set splitright")
+vim.cmd("let g:python3_host_prog='/Users/marcellefebvre/.pyenv/shims/python3'")
+vim.cmd("let g:python_host_prog='/Users/marcellefebvre/.pyenv/shims/python'")
+vim.g.mapleader = " "
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	virtual_text = false,
 	underline = false,
@@ -16,9 +27,9 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
-require("keymaps")
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 	},
 })
+require("keymaps")

@@ -1,13 +1,3 @@
-vim.opt.termguicolors = true
-vim.cmd("set clipboard=unnamed")
-vim.cmd("set conceallevel=1 guifont=:h columns=200")
-vim.cmd("set expandtab tabstop=2 softtabstop=2 shiftwidth=2")
-vim.cmd("set relativenumber number")
-vim.cmd("set wrap linebreak")
-vim.cmd("set splitright")
-vim.cmd("let g:python3_host_prog='/Users/marcellefebvre/.pyenv/shims/python3'")
-vim.cmd("let g:python_host_prog='/Users/marcellefebvre/.pyenv/shims/python'")
-vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>tk", ":Telescope keymaps<CR>", {})
 
@@ -18,9 +8,10 @@ vim.keymap.set("n", "N", "Nzz", {})
 vim.keymap.set("n", "N", "Nzz", {})
 vim.keymap.set("n", "k", "gk", {})
 vim.keymap.set("n", "j", "gj", {})
-vim.keymap.set({ "i", "v" }, "xz", "<esc>", {})
-vim.keymap.set("n", "<leader>s", ":w<CR>", {})
-vim.keymap.set("n", "<C-w>", ":bd<CR>", {})
+vim.keymap.set({ "i", "v" }, "<c-space>", "<esc>", {})
+vim.keymap.set("n", "<leader>wd", ":w<CR>", {})
+vim.keymap.set("n", "<leader>qq", ":bp|bd #<CR>", {})
+vim.keymap.set("n", "<leader>ex", ":Oil<cr>", {})
 
 vim.keymap.set("n", "<leader>spl", ":vsplit<CR>", {})
 vim.keymap.set("n", "<leader>cs", ":nohlsearch<CR>", {})
@@ -28,21 +19,10 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", {})
 vim.keymap.set("n", "<C-l>", "<C-w>l", {})
 vim.keymap.set("n", "<C-k>", "<C-w>k", {})
 vim.keymap.set("n", "<C-j>", "<C-w>j", {})
-vim.keymap.set("n", "<leader>tb", ":Telescope buffers<CR>", {})
-vim.keymap.set("n", "<leader>b", ":ls<CR>", {})
 
 vim.keymap.set("n", "<leader>tf", ":Telescope find_files<CR>", {})
 vim.keymap.set("n", "<leader>ts", ":Telescope live_grep<CR>", {})
 vim.keymap.set("n", "<leader>tn", ":Telescope notify<CR>", {})
-
--- REPL
-vim.keymap.set("n", "<leader>trm", ":vsplit<CR>:terminal<CR>", {})
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", {})
-vim.keymap.set("n", "<leader>sr", ":vsplit<CR>:vertical resize 70<CR>:terminal<CR>ir<cr><c-\\><c-n><c-w>h", {})
-vim.keymap.set("n", "<leader>sp", ":vsplit<CR>:vertical resize 70<CR>:terminal<CR>ipython<cr><c-\\><c-n><c-w>h", {})
-vim.keymap.set("v", "<leader>rv", "y<c-w>lpi<cr><c-\\><c-n><c-w>hgvV", {})
-vim.keymap.set("n", "<leader>rl", "yy<c-w>lpi<cr><c-\\><c-n><c-w>h", {})
-vim.keymap.set("n", "<leader>rp", "{y}<c-w>lpi<cr><c-\\><c-n><c-w>h}", {})
 
 -- Diagnostics
 vim.keymap.set("n", "<leader>td", ":Telescope diagnostics<CR>", {})
@@ -69,3 +49,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 	end,
 })
+
+local builtin = require("telescope.builtin")
+local action_state = require("telescope.actions.state")
+
+vim.keymap.set("n", "<leader>bb", function()
+	builtin.buffers({
+		initial_mode = "normal",
+		attach_mappings = function(prompt_bufnr, map)
+			local delete_buf = function()
+				local current_picker = action_state.get_current_picker(prompt_bufnr)
+				current_picker:delete_selection(function(selection)
+					vim.api.nvim_buf_delete(selection.bufnr, { force = true })
+				end)
+			end
+
+			map("n", "<c-d>", delete_buf)
+
+			return true
+		end,
+	}, {
+		sort_lastused = true,
+		sort_mru = true,
+		theme = "dropdown",
+	})
+end)
