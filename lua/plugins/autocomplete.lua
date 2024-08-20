@@ -18,8 +18,6 @@ return {
 			"kdheepak/cmp-latex-symbols",
 			"roobert/tailwindcss-colorizer-cmp.nvim",
 			"nvim-lua/plenary.nvim",
-			"jalvesaq/zotcite",
-			"jalvesaq/cmp-zotcite",
 		},
 		config = function()
 			-- require("luasnip.loaders.from_vscode").lazy_load() --TODO : write my own snippets
@@ -35,7 +33,7 @@ return {
 				show_labelDetails = true,
 			})
 			cmp.setup({
-				sources = cmp.config.sources({
+				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "path" },
 					-- { name = "luasnip" },
@@ -50,15 +48,12 @@ return {
 								return vim.tbl_keys(bufs)
 							end,
 						},
-					}, --TODO: not for md files
+					},
 					{ name = "latex_symbols" },
-					{ name = "cmp_zotcite" },
 					{ name = "vim-dadbod-completion" },
-				}),
+				},
 				window = { completion = cmp.config.window.bordered(), documentation = cmp.config.window.bordered() },
 				mapping = cmp.mapping.preset.insert({
-					-- ["<tab>"] = cmp.mapping.confirm({ select = false }),
-					-- ["<C-m>"] = cmp.mapping.complete(),
 					["<CR>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
 							if luasnip.expandable() then

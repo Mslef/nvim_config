@@ -8,31 +8,6 @@ return {
 		end,
 	},
 	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", "ryanoasis/vim-devicons" },
-		config = function()
-			require("lualine").setup({
-				theme = "nightfly",
-				sections = {
-					lualine_a = { "" },
-					lualine_b = { "" },
-					lualine_c = { "" },
-					lualine_x = { "filename", "filetype" },
-					lualine_y = { "branch", "diff", "searchcount" },
-				},
-			})
-		end,
-	},
-	{
-		"nvim-telescope/telescope.nvim",
-	},
-	{
-		"terrortylor/nvim-comment",
-		config = function()
-			require("nvim_comment").setup({})
-		end,
-	},
-	{
 		"norcalli/nvim-colorizer.lua",
 		opts = {
 			user_default_options = {
