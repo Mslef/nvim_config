@@ -10,20 +10,16 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", {})
 vim.keymap.set("n", "<C-k>", "<C-w>k", {})
 vim.keymap.set("n", "<C-j>", "<C-w>j", {})
 
-vim.keymap.set("n", "<leader>co", ":e ~/.config/nvim/.<cr>", {})
-vim.keymap.set("n", "<leader>t", ":term<cr>i", {})
+vim.keymap.set("n", "<leader>co", "<cmd>e ~/.config/nvim/.<cr>", {})
+vim.keymap.set("n", "<leader>t", "<cmd>term<cr>i", {})
 vim.keymap.set("t", "<Esc>", "<c-\\><c-n>", {})
-vim.keymap.set("n", "<leader>of", vim.diagnostic.open_float, {})
-vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_prev, {})
-vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_next, {})
-vim.keymap.set("n", "<leader>ac", vim.lsp.buf.code_action, {})
 
-vim.keymap.set("n", "<leader>db", ":DBUIToggle<CR>", {})
-vim.keymap.set("n", "<leader>x", ":Oil<cr>", {})
-
--- À éliminer
-vim.keymap.set("n", "<leader>cs", ":noh<CR>", {})
-vim.keymap.set("n", "<leader>qq", ":bp|bd #<CR>", {})
+vim.keymap.set("n", "<leader>gs", "<cmd>Git status<cr>", {})
+vim.keymap.set("n", "<leader>gc", "<cmd>Git commit<cr>", {})
+vim.keymap.set("n", "<leader>gp", "<cmd>Git push<cr>", {})
+vim.keymap.set("n", "<leader>df", "<cmd>Git diff<cr>", {})
+vim.keymap.set("n", "<leader>db", "<cmd>DBUIToggle<CR>", {})
+vim.keymap.set("n", "<leader>x", "<cmd>Oil<cr>", {})
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	desc = "LSP actions",
@@ -34,5 +30,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>gt", vim.lsp.buf.type_definition, opts)
 		vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, opts)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "<leader>of", vim.diagnostic.open_float, {})
+		vim.keymap.set("n", "<leader>j", vim.diagnostic.goto_prev, {})
+		vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_next, {})
+		vim.keymap.set("n", "<leader>ac", vim.lsp.buf.code_action, {})
 	end,
 })

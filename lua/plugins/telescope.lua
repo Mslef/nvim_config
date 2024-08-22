@@ -1,14 +1,14 @@
 Builtin = require("telescope.builtin")
 Action_state = require("telescope.actions.state")
 
-vim.keymap.set("n", "<leader>f", ":Telescope find_files<CR>", {})
-vim.keymap.set("n", "<leader>s", ":Telescope live_grep<CR>", {})
-vim.keymap.set("n", "<leader>m", ":Telescope notify<CR>", {})
-vim.keymap.set("n", "<leader>dd", ":Telescope diagnostics<CR>", {})
+vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", {})
+vim.keymap.set("n", "<leader>s", "<cmd>Telescope live_grep<CR>", {})
+vim.keymap.set("n", "<leader>m", "<cmd>Telescope notify<CR>", {})
+vim.keymap.set("n", "<leader>dd", "<cmd>Telescope diagnostics<CR>", {})
 
 -- Buffers
-vim.keymap.set("n", "<leader>l", ":bn<cr>", {})
-vim.keymap.set("n", "<leader>h", ":bp<cr>", {})
+vim.keymap.set("n", "<leader>l", "<cmd>bn<cr>", {})
+vim.keymap.set("n", "<leader>h", "<cmd>bp<cr>", {})
 vim.keymap.set("n", "<leader>b", function()
 	Builtin.buffers({
 		initial_mode = "normal",
