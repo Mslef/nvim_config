@@ -12,12 +12,13 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", {})
 
 vim.keymap.set("n", "<leader>co", "<cmd>e ~/.config/nvim/.<cr>", {})
 vim.keymap.set("n", "<leader>t", "<cmd>term<cr>i", {})
-vim.keymap.set("t", "<Esc>", "<c-\\><c-n>", {})
+vim.keymap.set("t", "<c-x>", "<c-\\><c-n>", {})
 
 vim.keymap.set("n", "<leader>gs", "<cmd>Git status<cr>", {})
 vim.keymap.set("n", "<leader>gc", "<cmd>Git commit<cr>", {})
 vim.keymap.set("n", "<leader>gp", "<cmd>Git push<cr>", {})
 vim.keymap.set("n", "<leader>df", "<cmd>Git diff<cr>", {})
+vim.keymap.set("n", "<leader>gg", "<cmd>te lazygit<cr><cmd>set nonumber norelativenumber<cr>i", {})
 vim.keymap.set("n", "<leader>db", "<cmd>DBUIToggle<CR>", {})
 vim.keymap.set("n", "<leader>x", "<cmd>Oil<cr>", {})
 

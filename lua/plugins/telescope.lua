@@ -7,8 +7,6 @@ vim.keymap.set("n", "<leader>m", "<cmd>Telescope notify<CR>", {})
 vim.keymap.set("n", "<leader>dd", "<cmd>Telescope diagnostics<CR>", {})
 
 -- Buffers
-vim.keymap.set("n", "<leader>l", "<cmd>bn<cr>", {})
-vim.keymap.set("n", "<leader>h", "<cmd>bp<cr>", {})
 vim.keymap.set("n", "<leader>b", function()
 	Builtin.buffers({
 		initial_mode = "normal",
