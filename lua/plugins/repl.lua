@@ -7,8 +7,6 @@ function ToggleRTerm()
 		vim.api.nvim_command("hide")
 	else
 		if vim.fn.bufexists(Te_buf) ~= 1 then
-			-- vim.api.nvim_command("au TermOpen * setlocal nonumber norelativenumber signcolumn=no")
-			-- "<cmd>65vs<CR><cmd>term r<cr><c-\\><c-n><c-w>h"
 			vim.api.nvim_command("65vs | te r")
 			Te_win_id = vim.fn.win_getid()
 			Te_buf = vim.fn.bufnr("%")
@@ -24,7 +22,6 @@ vim.api.nvim_create_autocmd("BufRead", {
 	pattern = "*.R",
 	callback = function(args)
 		vim.keymap.set("n", "<leader><leader>", ToggleRTerm, {})
-		-- vim.keymap.set("n", "<leader>sp", "65<cmd>vt<CR><cmd>term python<cr><cr><c-\\><c-n><c-w>h", {})
 		vim.keymap.set("n", "<cr>", "yy<c-w>lpi<cr><c-\\><c-n><c-w>hj", {})
 		vim.keymap.set("n", "<leader><cr>", "{y}<c-w>lpi<cr><c-\\><c-n><c-w>h}j", {})
 		vim.keymap.set("v", "<cr>", "y<c-w>lpi<cr><c-\\><c-n><c-w>hgv<esc>", {})
