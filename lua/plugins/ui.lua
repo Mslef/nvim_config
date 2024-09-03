@@ -19,15 +19,17 @@ return {
 		"kristijanhusak/vim-dadbod-ui",
 		dependencies = { "tpope/vim-dadbod", "kristijanhusak/vim-dadbod-completion" },
 	},
+	{ "tpope/vim-surround" },
+	{
+		"tpope/vim-fugitive",
+	},
 	{
 		"stevearc/oil.nvim",
 		config = function()
 			require("oil").setup({})
 		end,
 	},
-  {
-    "tpope/vim-fugitive"
-  },{
+	{
 		"folke/noice.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		event = "VeryLazy",
