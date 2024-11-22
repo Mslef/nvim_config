@@ -20,7 +20,6 @@ return {
 			"nvim-lua/plenary.nvim",
 		},
 		config = function()
-			-- require("luasnip.loaders.from_vscode").lazy_load() --TODO : write my own snippets
 			require("nvim-ts-autotag").setup()
 			local luasnip = require("luasnip")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -36,20 +35,24 @@ return {
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "path" },
-					-- { name = "luasnip" },
 					{
 						name = "buffer",
+						-- option = {
+						-- 	get_bufnrs = function()
+						-- 		local bufs = {}
+						-- 		for _, win in ipairs(vim.api.nvim_list_wins()) do
+						-- 			bufs[vim.api.nvim_win_get_buf(win)] = true
+						-- 		end
+						-- 		return vim.tbl_keys(bufs)
+						-- 	end,
+						-- },
+					},
+					{
+						name = "latex_symbols",
 						option = {
-							get_bufnrs = function()
-								local bufs = {}
-								for _, win in ipairs(vim.api.nvim_list_wins()) do
-									bufs[vim.api.nvim_win_get_buf(win)] = true
-								end
-								return vim.tbl_keys(bufs)
-							end,
+							strategy = 0,
 						},
 					},
-					{ name = "latex_symbols" },
 					{ name = "vim-dadbod-completion" },
 				},
 				window = { completion = cmp.config.window.bordered(), documentation = cmp.config.window.bordered() },
@@ -88,16 +91,9 @@ return {
 						end
 					end, { "i", "s" }),
 				}),
-				snippet = {
-					expand = function(args)
-						luasnip.filetype_extend("javascriptreact", { "html" })
-						luasnip.lsp_expand(args.body)
-					end,
-				},
 				formatting = {
 					format = function(entry, item)
 						lspkind(entry, item)
-						-- Tailwind color swatches
 						return require("tailwindcss-colorizer-cmp").formatter(entry, item)
 					end,
 				},

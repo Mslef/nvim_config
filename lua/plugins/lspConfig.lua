@@ -18,7 +18,7 @@ return {
 				})
 			end
 			require("mason-lspconfig").setup({
-				ensure_installed = { "tsserver", "lua_ls" },
+				ensure_installed = { "lua_ls" },
 				handlers = {
 					default_setup,
 					lua_ls = function()
@@ -40,10 +40,11 @@ return {
 							},
 						})
 					end,
-					tsserver = lspconfig.tsserver.setup({}),
+					ts_ls = lspconfig.ts_ls.setup({}),
 					astro = lspconfig.astro.setup({}),
+					svelte = lspconfig.svelte.setup({}),
 					r_language_server = lspconfig.r_language_server.setup({}),
-					-- ltex = lspconfig.ltex.setup({}),
+					ltex = lspconfig.ltex.setup({}),
 				},
 			})
 		end,

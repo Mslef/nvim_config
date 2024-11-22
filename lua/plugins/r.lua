@@ -18,8 +18,13 @@ function ToggleRTerm()
 	end
 end
 
+function RenderRmd()
+	local file_name = vim.api.nvim_buf_get_name(0)
+	vim.notify(file_name, 2)
+end
+
 vim.api.nvim_create_autocmd("BufRead", {
-	pattern = "*.R",
+	pattern = "*.R,*.Rmd,*.rmd",
 	callback = function(args)
 		vim.keymap.set("n", "<leader><leader>", ToggleRTerm, {})
 		vim.keymap.set("n", "<cr>", "yy<c-w>lpi<cr><c-\\><c-n><c-w>hj", {})
@@ -29,7 +34,22 @@ vim.api.nvim_create_autocmd("BufRead", {
 		vim.keymap.set("n", "<c-p>", "yiw<c-w>liplot(<c-\\><c-n>pi)<cr><c-\\><c-n><c-w>h", {})
 		vim.keymap.set("n", "<c-s>", "yiw<c-w>listr(<c-\\><c-n>pi)<cr><c-\\><c-n><c-w>h", {})
 		vim.keymap.set("n", "<leader>p", "yiw<c-w>liprint(<c-\\><c-n>pi)<cr><c-\\><c-n><c-w>h", {})
-		vim.keymap.set("n", "<leader>h>", "yiw<c-w>lihead(<c-\\><c-n>pi)<cr><c-\\><c-n><c-w>h", {})
+		vim.keymap.set("n", "<leader>he", "yiw<c-w>lihead(<c-\\><c-n>pi)<cr><c-\\><c-n><c-w>h", {})
+		vim.keymap.set("i", "<c-a>", "<-", {})
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = "*.Rmd,*.rmd",
+	callback = function(args)
+		vim.keymap.set("i", "<c-b>", "`", {})
+		vim.keymap.set("i", "<c-c>", "```{r}<cr><cr>```", {})
+		vim.keymap.set(
+			"n",
+			"<leader>r",
+			'<cmd>let @+ = expand("%:p")<cr><c-w>lirmarkdown::render(input="<c-\\><c-n>pi")<cr><c-\\><c-n><c-w>h',
+			{}
+		)
 	end,
 })
 
