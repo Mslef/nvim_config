@@ -5,6 +5,7 @@ vim.keymap.set("n", "<leader>f", "<cmd>Telescope find_files<CR>", {})
 vim.keymap.set("n", "<leader>s", "<cmd>Telescope live_grep<CR>", {})
 vim.keymap.set("n", "<leader>m", "<cmd>Telescope notify<CR>", {})
 vim.keymap.set("n", "<leader>dd", "<cmd>Telescope diagnostics<CR>", {})
+vim.keymap.set("n", "<leader>ct", "<cmd>lua require('telescope.builtin').colorscheme({enable_preview = true})<CR>", {})
 
 -- Buffers
 vim.keymap.set("n", "<leader>b", function()
