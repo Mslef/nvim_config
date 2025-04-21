@@ -13,6 +13,7 @@ return {
 			typescript = { "ts", "tsx" },
 		},
 		formatters_by_ft = {
+			r = { "air" },
 			lua = { "stylua" },
 			python = { "autopep8" },
 			python3 = { "autopep8" },

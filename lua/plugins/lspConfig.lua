@@ -42,8 +42,16 @@ return {
 					end,
 					ts_ls = lspconfig.ts_ls.setup({}),
 					astro = lspconfig.astro.setup({}),
-					svelte = lspconfig.svelte.setup({}),
-					r_language_server = lspconfig.r_language_server.setup({}),
+					air = lspconfig.air.setup({
+						on_attach = function(_, bufnr)
+							vim.api.nvim_create_autocmd("BufWritePre", {
+								buffer = bufnr,
+								callback = function()
+									vim.lsp.buf.format()
+								end,
+							})
+						end,
+					}),
 					ltex = lspconfig.ltex.setup({}),
 				},
 			})
