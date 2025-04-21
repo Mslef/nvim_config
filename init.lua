@@ -5,8 +5,6 @@ vim.cmd("set expandtab tabstop=2 softtabstop=2 shiftwidth=2")
 vim.cmd("set relativenumber number")
 vim.cmd("set wrap linebreak")
 vim.cmd("set splitright")
-vim.cmd("let g:python3_host_prog='/Users/marcellefebvre/.pyenv/shims/python3'")
-vim.cmd("let g:python_host_prog='/Users/marcellefebvre/.pyenv/shims/python'")
 vim.g.mapleader = " "
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
