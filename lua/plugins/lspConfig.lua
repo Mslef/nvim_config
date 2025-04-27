@@ -1,16 +1,15 @@
 return {
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "neovim/nvim-lspconfig",
-    },
+    dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp" },
     lazy = false,
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
-          require("lspconfig")[server_name].setup({})
+          require("lspconfig")[server_name].setup({
+            capabilities = require("cmp_nvim_lsp").default_capabilities(),
+          })
           if server_name == "lua_ls" then
             require("lspconfig")[server_name].setup({
               settings = {
@@ -37,31 +36,11 @@ return {
         highlight = { enable = true },
         indent = { enable = true },
         ensure_installed = {
-          "bash",
-          "astro",
-          "c",
-          "css",
-          "html",
-          "luadoc",
-          "luap",
-          "query",
-          "regex",
-          "tsx",
-          "typescript",
-          "vimdoc",
-          "bash",
-          "javascript",
-          "json",
-          "lua",
-          "markdown",
-          "markdown_inline",
-          "python",
-          "vim",
-          "yaml",
-          "julia",
-          "r",
+          "bash", "astro", "c", "css", "html", "luadoc", "luap", "query", "regex", "tsx", "typescript", "vimdoc", "bash",
+          "javascript", "json", "lua", "markdown", "markdown_inline", "python", "vim", "yaml", "julia", "r",
         },
       })
     end,
   },
 }
+
