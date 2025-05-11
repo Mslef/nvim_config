@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd("BufRead", {
 })
 
 vim.api.nvim_create_autocmd("BufRead", {
-	pattern = "*.go, *.templ",
+	pattern = "*.go,*.templ",
 	callback = function(args)
 		vim.keymap.set("n", "<leader><leader>", ToggleTerm, {})
 	end,
