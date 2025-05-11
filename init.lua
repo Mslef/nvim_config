@@ -4,12 +4,7 @@ vim.cmd("set conceallevel=1 guifont=:h columns=200")
 vim.cmd("set expandtab tabstop=2 softtabstop=2 shiftwidth=2")
 vim.cmd("set relativenumber number wrap linebreak splitright")
 vim.g.mapleader = " "
-vim.cmd([[autocmd FileType * set formatoptions-=ro]]) -- disable new line auto comment
-
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
--- 	virtual_text = false,
--- 	underline = false,
--- })
+vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -20,4 +15,3 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({ spec = { { import = "plugins" } } })
 require("keymaps")
--- require("lsp") TODO: fix and cleanup
