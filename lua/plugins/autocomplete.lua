@@ -24,7 +24,6 @@ return {
 			local luasnip = require("luasnip")
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 			local cmp = require("cmp")
-			-- Icons
 			local lspkind = require("lspkind").cmp_format({
 				mode = "symbol",
 				maxwidth = 50,
@@ -35,7 +34,7 @@ return {
 				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "path" },
-					{ name = "buffer" },
+					-- { name = "buffer" },
 					{
 						name = "latex_symbols",
 						option = {

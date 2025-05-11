@@ -10,19 +10,33 @@ return {
 					require("lspconfig")[server_name].setup({
 						capabilities = require("cmp_nvim_lsp").default_capabilities(),
 					})
-					if server_name == "lua_ls" then
-						require("lspconfig")[server_name].setup({
-							settings = {
-								Lua = {
-									runtime = { version = "LuaJIT" },
-									diagnostics = { globals = { "vim" } },
-									workspace = {
-										library = { vim.env.VIMRUNTIME },
-									},
+					require("lspconfig").lua_ls.setup({
+						settings = {
+							Lua = {
+								runtime = { version = "LuaJIT" },
+								diagnostics = { globals = { "vim" } },
+								workspace = {
+									library = { vim.env.VIMRUNTIME },
 								},
 							},
-						})
-					end
+						},
+					})
+					require("lspconfig").r_language_server.setup({
+						on_attach = function(client, _)
+							client.server_capabilities.documentFormattingProvider = false
+							client.server_capabilities.documentRangeFormattingProvider = false
+						end,
+					})
+					require("lspconfig").air.setup({
+						on_attach = function(_, bufnr)
+							vim.api.nvim_create_autocmd("BufWritePre", {
+								buffer = bufnr,
+								callback = function()
+									vim.lsp.buf.format()
+								end,
+							})
+						end,
+					})
 				end,
 			})
 		end,
@@ -37,25 +51,16 @@ return {
 				indent = { enable = true },
 				ensure_installed = {
 					"bash",
-					"astro",
-					"c",
 					"css",
 					"html",
-					"luadoc",
-					"luap",
-					"query",
-					"regex",
 					"tsx",
 					"typescript",
-					"vimdoc",
-					"bash",
 					"javascript",
 					"json",
 					"lua",
 					"markdown",
 					"markdown_inline",
 					"python",
-					"vim",
 					"yaml",
 					"julia",
 					"r",
