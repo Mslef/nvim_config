@@ -40,3 +40,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>k", vim.diagnostic.goto_next, {})
 	end,
 })
+
+Notes_subdir = "/Users/marcellefebvre/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes/"
+CreateNote = function()
+	vim.cmd("e " .. Notes_subdir .. os.date("%d%m%Y%H%M") .. ".md")
+end
+SearchNotes = function()
+	vim.cmd("lcd " .. Notes_subdir .. " | Telescope live_grep")
+end
+
+vim.keymap.set("n", "<leader>n", CreateNote, {})
+vim.keymap.set("n", "<leader>sn", SearchNotes, {})
